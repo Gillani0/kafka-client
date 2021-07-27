@@ -22,11 +22,11 @@ package consumer
 
 import (
 	"fmt"
+	"github.com/Gillani0/kafka-client/internal/list"
+	"github.com/Gillani0/kafka-client/internal/metrics"
 	"sync"
 	"time"
 
-	"github.com/uber-go/kafka-client/internal/list"
-	"github.com/uber-go/kafka-client/internal/metrics"
 	"github.com/uber-go/tally"
 	"go.uber.org/zap"
 )

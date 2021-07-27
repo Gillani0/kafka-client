@@ -21,8 +21,9 @@
 package kafkaclient
 
 import (
-	"github.com/uber-go/kafka-client/internal/consumer"
-	"github.com/uber-go/kafka-client/kafka"
+	"github.com/Gillani0/kafka-client/internal/consumer"
+	"github.com/Gillani0/kafka-client/kafka"
+	"time"
 )
 
 type (
@@ -41,6 +42,9 @@ type (
 
 	clientIDOptions struct {
 		clientID string
+	}
+	additionalOptions struct {
+		interval time.Duration
 	}
 )
 
@@ -79,6 +83,10 @@ func (o *retryTopicsOptions) apply(opts *consumer.Options) {
 	}
 }
 
+func (a *additionalOptions) apply(opts *consumer.Options) {
+	opts.OffsetCommitInterval = a.interval
+}
+
 // WithClientID sets client id.
 func WithClientID(clientID string) ConsumerOption {
 	return &clientIDOptions{
@@ -86,6 +94,11 @@ func WithClientID(clientID string) ConsumerOption {
 	}
 }
 
+func WithAdditionalOptions(interval time.Duration) ConsumerOption {
+	return &additionalOptions{
+		interval: interval,
+	}
+}
 func (o *clientIDOptions) apply(opts *consumer.Options) {
 	opts.ClientID = o.clientID
 }

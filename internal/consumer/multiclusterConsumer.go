@@ -22,10 +22,10 @@ package consumer
 
 import (
 	"errors"
+	"github.com/Gillani0/kafka-client/internal/metrics"
+	"github.com/Gillani0/kafka-client/internal/util"
+	"github.com/Gillani0/kafka-client/kafka"
 	"github.com/Shopify/sarama"
-	"github.com/uber-go/kafka-client/internal/metrics"
-	"github.com/uber-go/kafka-client/internal/util"
-	"github.com/uber-go/kafka-client/kafka"
 	"github.com/uber-go/tally"
 	"go.uber.org/zap"
 )
@@ -46,7 +46,7 @@ type (
 )
 
 // NewMultiClusterConsumer returns a new consumer that consumes messages from
-// multiple Kafka clusters.
+// multiple kafka clusters.
 func NewMultiClusterConsumer(
 	groupName string,
 	topics kafka.ConsumerTopicList,
@@ -61,11 +61,11 @@ func NewMultiClusterConsumer(
 		topics:                   topics,
 		clusterConsumerMap:       clusterConsumerMap,
 		clusterToSaramaClientMap: saramaClients,
-		msgC:      msgC,
-		doneC:     make(chan struct{}),
-		scope:     scope,
-		logger:    logger,
-		lifecycle: util.NewRunLifecycle(groupName + "-consumer"),
+		msgC:                     msgC,
+		doneC:                    make(chan struct{}),
+		scope:                    scope,
+		logger:                   logger,
+		lifecycle:                util.NewRunLifecycle(groupName + "-consumer"),
 	}
 }
 

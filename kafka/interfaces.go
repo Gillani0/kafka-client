@@ -56,7 +56,7 @@ type (
 		HighOffset int64
 	}
 
-	// Message is the interface for a Kafka message
+	// Message is the interface for a kafka message
 	Message interface {
 		zapcore.ObjectMarshaler
 

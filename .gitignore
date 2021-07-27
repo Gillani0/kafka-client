@@ -1,8 +1,0 @@
-# Folders
-vendor
-*.prof
-*.pprof
-*.out
-*.log
-.idea
-.okbuck

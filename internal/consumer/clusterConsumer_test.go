@@ -21,6 +21,8 @@
 package consumer
 
 import (
+	"github.com/Gillani0/kafka-client/internal/util"
+	"github.com/Gillani0/kafka-client/kafka"
 	"sync"
 	"testing"
 	"time"
@@ -28,8 +30,6 @@ import (
 	"github.com/Shopify/sarama"
 	"github.com/bsm/sarama-cluster"
 	"github.com/stretchr/testify/suite"
-	"github.com/uber-go/kafka-client/internal/util"
-	"github.com/uber-go/kafka-client/kafka"
 	"github.com/uber-go/tally"
 	"go.uber.org/zap"
 )

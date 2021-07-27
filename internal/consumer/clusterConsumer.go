@@ -23,14 +23,14 @@ package consumer
 import (
 	"errors"
 	"fmt"
+	"github.com/Gillani0/kafka-client/internal/metrics"
+	"github.com/Gillani0/kafka-client/internal/util"
+	"github.com/Gillani0/kafka-client/kafka"
 	"strconv"
 	"sync"
 	"time"
 
 	"github.com/bsm/sarama-cluster"
-	"github.com/uber-go/kafka-client/internal/metrics"
-	"github.com/uber-go/kafka-client/internal/util"
-	"github.com/uber-go/kafka-client/kafka"
 	"github.com/uber-go/tally"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
@@ -41,7 +41,7 @@ const (
 )
 
 type (
-	// ClusterConsumer is a consumer for a single Kafka cluster.
+	// ClusterConsumer is a consumer for a single kafka cluster.
 	ClusterConsumer struct {
 		cluster          string
 		consumer         SaramaConsumer

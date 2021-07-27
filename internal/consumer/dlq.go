@@ -23,12 +23,12 @@ package consumer
 import (
 	"errors"
 	"fmt"
+	"github.com/Gillani0/kafka-client/internal/metrics"
+	"github.com/Gillani0/kafka-client/internal/util"
+	"github.com/Gillani0/kafka-client/kafka"
 
 	"github.com/Shopify/sarama"
 	"github.com/golang/protobuf/proto"
-	"github.com/uber-go/kafka-client/internal/metrics"
-	"github.com/uber-go/kafka-client/internal/util"
-	"github.com/uber-go/kafka-client/kafka"
 	"github.com/uber-go/tally"
 	"go.uber.org/zap"
 )
@@ -78,7 +78,7 @@ type (
 		dlqTopic DLQ
 	}
 
-	// bufferedErrorTopic is a client side abstraction for an error topic on the Kafka cluster.
+	// bufferedErrorTopic is a client side abstraction for an error topic on the kafka cluster.
 	// This library uses the error topic as a base abstraction for retry and dlq topics.
 	//
 	// bufferedErrorTopic internally batches messages, so calls to Add may block until the internal

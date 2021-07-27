@@ -21,9 +21,9 @@
 package kafkaclient
 
 import (
+	"github.com/Gillani0/kafka-client/kafka"
 	"os"
 
-	"github.com/uber-go/kafka-client/kafka"
 	"github.com/uber-go/tally"
 	"go.uber.org/zap"
 )

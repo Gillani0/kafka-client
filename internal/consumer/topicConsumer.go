@@ -21,11 +21,11 @@
 package consumer
 
 import (
+	"github.com/Gillani0/kafka-client/internal/metrics"
+	"github.com/Gillani0/kafka-client/kafka"
 	"sync"
 
 	"github.com/bsm/sarama-cluster"
-	"github.com/uber-go/kafka-client/internal/metrics"
-	"github.com/uber-go/kafka-client/kafka"
 	"github.com/uber-go/tally"
 	"go.uber.org/zap"
 )

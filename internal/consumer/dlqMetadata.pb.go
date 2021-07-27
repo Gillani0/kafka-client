@@ -66,8 +66,8 @@ type DLQMetadata struct {
 	// timestamp_ns is the original record timestamp of the original mesage.
 	TimestampNs int64 `protobuf:"varint,5,opt,name=timestamp_ns,json=timestampNs" json:"timestamp_ns,omitempty"`
 	// data is a byte buffer for storing arbitrary information.
-	// This is useful if the Kafka Broker version used is < 0.11
-	// and hence Kafka native record headers (KAFKA-4208) are unavaiable
+	// This is useful if the kafka Broker version used is < 0.11
+	// and hence kafka native record headers (KAFKA-4208) are unavaiable
 	// so the DLQ metadata must be stored in the record Key or Value.
 	Data []byte `protobuf:"bytes,6,opt,name=data,proto3" json:"data,omitempty"`
 }

@@ -21,12 +21,12 @@
 package kafkaclient
 
 import (
+	"github.com/Gillani0/kafka-client/internal/consumer"
+	"github.com/Gillani0/kafka-client/kafka"
 	"time"
 
 	"github.com/Shopify/sarama"
 	"github.com/bsm/sarama-cluster"
-	"github.com/uber-go/kafka-client/internal/consumer"
-	"github.com/uber-go/kafka-client/kafka"
 	"github.com/uber-go/tally"
 	"go.uber.org/zap"
 )
@@ -76,9 +76,9 @@ func newConsumerBuilder(
 		clusterSaramaClientMap:        make(map[consumer.ClusterGroup]sarama.Client),
 		clusterSaramaConsumerMap:      make(map[consumer.ClusterGroup]consumer.SaramaConsumer),
 		clusterTopicSaramaProducerMap: make(map[string]map[string]sarama.AsyncProducer),
-		msgCh:  make(chan kafka.Message, consumerOptions.RcvBufferSize),
-		logger: logger.With(zap.String("consumergroup", config.GroupName)),
-		scope:  scope.Tagged(map[string]string{"consumergroup": config.GroupName}),
+		msgCh:                         make(chan kafka.Message, consumerOptions.RcvBufferSize),
+		logger:                        logger.With(zap.String("consumergroup", config.GroupName)),
+		scope:                         scope.Tagged(map[string]string{"consumergroup": config.GroupName}),
 		constructors: consumer.Constructors{
 			NewSaramaConsumer: consumer.NewSaramaConsumer,
 			NewSaramaProducer: consumer.NewSaramaProducer,
@@ -323,6 +323,9 @@ func buildOptions(config *kafka.ConsumerConfig, consumerOpts ...ConsumerOption) 
 	offsetPolicy := config.Offsets.Initial.Offset
 	if offsetPolicy == sarama.OffsetNewest || offsetPolicy == sarama.OffsetOldest {
 		opts.OffsetPolicy = config.Offsets.Initial.Offset
+	}
+	if config.TLSConfig != nil {
+		opts.TLSConfig = config.TLSConfig
 	}
 
 	// Apply optional consumer parameters that may be passed in.

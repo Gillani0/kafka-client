@@ -23,16 +23,16 @@ package consumer
 import (
 	"errors"
 	"fmt"
+	"github.com/Gillani0/kafka-client/internal/list"
+	"github.com/Gillani0/kafka-client/internal/metrics"
+	"github.com/Gillani0/kafka-client/internal/util"
+	"github.com/Gillani0/kafka-client/kafka"
 	"math"
 	"strconv"
 	"time"
 
 	"github.com/Shopify/sarama"
 	"github.com/bsm/sarama-cluster"
-	"github.com/uber-go/kafka-client/internal/list"
-	"github.com/uber-go/kafka-client/internal/metrics"
-	"github.com/uber-go/kafka-client/internal/util"
-	"github.com/uber-go/kafka-client/kafka"
 	"github.com/uber-go/tally"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
@@ -330,7 +330,7 @@ func (p *partitionConsumer) markOffset() {
 		p.sarama.MarkPartitionOffset(p.topicPartition.Topic.Name, p.topicPartition.partition, latestOff, "")
 		p.tally.Gauge(metrics.KafkaPartitionCommitOffset).Update(float64(latestOff))
 		// Highwatermark is the next offset that will be produced.
-		// Kafka contains offsets 100 - 200, HighWaterMark=201, (consumed) latestOff=150, 200-150 = 50 = 201-1-150 unconsumed messages
+		// kafka contains offsets 100 - 200, HighWaterMark=201, (consumed) latestOff=150, 200-150 = 50 = 201-1-150 unconsumed messages
 		backlog := math.Max(float64(0), float64(p.pConsumer.HighWaterMarkOffset()-1-latestOff))
 		p.tally.Gauge(metrics.KafkaPartitionOffsetLag).Update(backlog)
 		//p.logger.Debug("partition consumer mark kafka checkpoint", zap.Int64("offset", latestOff))

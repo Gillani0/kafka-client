@@ -22,14 +22,14 @@ package consumer
 
 import (
 	"fmt"
+	"github.com/Gillani0/kafka-client/internal/util"
+	"github.com/Gillani0/kafka-client/kafka"
 	"sync"
 	"sync/atomic"
 	"time"
 
 	"github.com/Shopify/sarama"
 	cluster "github.com/bsm/sarama-cluster"
-	"github.com/uber-go/kafka-client/internal/util"
-	"github.com/uber-go/kafka-client/kafka"
 	"go.uber.org/zap/zapcore"
 )
 
@@ -86,6 +86,38 @@ type (
 		messages []kafka.Message
 	}
 )
+
+func (m *mockSaramaClient) RefreshController() (*sarama.Broker, error) {
+	panic("implement me")
+}
+
+func (m *mockSaramaClient) Broker(brokerID int32) (*sarama.Broker, error) {
+	panic("implement me")
+}
+
+func (m *mockSaramaClient) RefreshBrokers(addrs []string) error {
+	panic("implement me")
+}
+
+func (m *mockSaramaClient) OfflineReplicas(topic string, partitionID int32) ([]int32, error) {
+	panic("implement me")
+}
+
+func (m *mockSaramaClient) InitProducerID() (*sarama.InitProducerIDResponse, error) {
+	panic("implement me")
+}
+
+func (m *mockPartitionedConsumer) InitialOffset() int64 {
+	panic("implement me")
+}
+
+func (m *mockPartitionedConsumer) MarkOffset(offset int64, metadata string) {
+	panic("implement me")
+}
+
+func (m *mockPartitionedConsumer) ResetOffset(offset int64, metadata string) {
+	panic("implement me")
+}
 
 func newMockSaramaProducer() *mockSaramaProducer {
 	return &mockSaramaProducer{

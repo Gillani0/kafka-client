@@ -22,12 +22,12 @@ package consumer
 
 import (
 	"errors"
+	"github.com/Gillani0/kafka-client/kafka"
 	"github.com/Shopify/sarama"
 	"testing"
 	"time"
 
 	"github.com/stretchr/testify/suite"
-	"github.com/uber-go/kafka-client/kafka"
 	"github.com/uber-go/tally"
 	"go.uber.org/zap"
 )
